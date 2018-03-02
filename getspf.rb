@@ -57,7 +57,7 @@ def parse_spf_string(str)
 end
 
 def get_spf(v)
-	arr = {}
+	arr = []
 	res = []
 	answer = @dns.query(v,'txt').answer
 	answer.each do |a|

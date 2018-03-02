@@ -57,16 +57,16 @@ def parse_spf_string(str)
 end
 
 def get_spf(v)
-	arr = []
+	arr = {}
 	res = []
 	answer = @dns.query(v,'txt').answer
 	answer.each do |a|
-		next unless a.txt.match(/^"?v=spf[12]/i)
+		next unless a.txt.match(/^"?v=spf(1|2)/i)
 		printf("%s\n\t%s\n", v, a.txt)
 		arr << a.txt
 	end
 	if arr.size > 1
-		STDERR.puts "Not in compliance with RFC. More than one record for #{v}"
+		STDERR.puts "Not in compliance with RFC. More than one record for #{v} (or just using spf1 and spf2)"
 		STDERR.puts arr
 		exit 1
 	elsif arr.size < 1

@@ -1,4 +1,4 @@
-#!/usr/bin/ruby -W0
+#!/usr/bin/ruby
 
 require 'optparse'
 require 'rubygems'
@@ -61,7 +61,7 @@ def get_spf(v)
 	res = []
 	answer = @dns.query(v,'txt').answer
 	answer.each do |a|
-		next unless a.txt.match(/^"?v=spf1/i)
+		next unless a.txt.match(/^"?v=spf[12]/i)
 		printf("%s\n\t%s\n", v, a.txt)
 		arr << a.txt
 	end
